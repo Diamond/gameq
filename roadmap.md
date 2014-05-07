@@ -3,6 +3,7 @@ Roadmap
 
 Feature List
 ------------
+
 - User Accounts
     - Overall Game List
     - Console List
@@ -31,3 +32,9 @@ Feature List
 - Score for completing to-do lists
     - Flat rate per game
 - Import support for CSV, TXT
+
+Feature Plan
+------------
+
+- v0.0.1
+  - User account API

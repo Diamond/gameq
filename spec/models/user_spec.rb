@@ -8,10 +8,26 @@ describe User do
     end
 
     context "With invalid data" do
-      it "is invalid without an email"
-      it "is invalid without a password"
-      it "is invalid if the password and password confirmation do not match"
-      it "is invalid if the email is already registered"
+      it "is invalid without an email" do
+        subject.email = nil
+        expect(subject.valid?).to be_false
+      end
+
+      it "is invalid without a password" do
+        subject.password = nil
+        expect(subject.valid?).to be_false
+      end
+
+      it "is invalid if the password and password confirmation do not match" do
+        subject.password = "foobarbaz"
+        expect(subject.valid?).to be_false
+      end
+
+      it "is invalid if the email is already registered" do
+        subject.email = 'test@test.com'
+        FactoryGirl.create(:user, email: subject.email)
+        expect(subject.valid?).to be_false
+      end
     end
   end
 end
