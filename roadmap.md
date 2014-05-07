@@ -38,3 +38,12 @@ Feature Plan
 
 - v0.0.1
   - User account API
+    - Can register for an account
+    - Can login
+    - Cannot register a duplicate account
+    - Cannot register an invalid account
+    - Cannot login with invalid credentials
+    - User Model created and 100% spec coverage
+    - User Controller created and 100% spec coverage
+    - User Integration created and 100% spec coverage
+
