@@ -39,4 +39,5 @@ group :development, :test do
   gem 'factory_girl_rails'
   gem 'pry'
   gem 'spork'
+  gem 'database_cleaner'
 end
