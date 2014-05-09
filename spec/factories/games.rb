@@ -2,7 +2,7 @@
 
 FactoryGirl.define do
   factory :game do
-    name "MyString"
-    completed false
+    sequence(:name) { |n| "game#{n}" }
+    completed false 
   end
 end
