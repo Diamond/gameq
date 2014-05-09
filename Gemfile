@@ -33,6 +33,7 @@ end
 gem 'sorcery'
 # Use Thin as the application server
 gem 'thin'
+gem 'bcrypt'
 
 group :development, :test do
   gem 'rspec-rails'
@@ -40,4 +41,6 @@ group :development, :test do
   gem 'pry'
   gem 'spork'
   gem 'database_cleaner'
+  gem 'mocha'
+  gem 'simplecov'
 end
