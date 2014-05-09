@@ -1,6 +1,6 @@
 class Game < ActiveRecord::Base
 
-  validates_uniqueness_of :name
+  validates :name, uniqueness: true, presence: true
 
   scope :complete,   -> { where(completed: true) }
   scope :incomplete, -> { where(completed: false) }
