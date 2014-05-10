@@ -30,4 +30,16 @@ describe User do
       end
     end
   end
+
+  context "When the user has games" do
+    before :each do
+      @user = FactoryGirl.build(:user)
+      @game = FactoryGirl.build(:game)
+      @user.games << @game
+    end
+
+    it "has the game associated" do
+      expect(@user.games).to include(@game)
+    end
+  end
 end

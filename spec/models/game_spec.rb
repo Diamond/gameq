@@ -27,4 +27,16 @@ describe Game do
       it { should include(@game2) }
     end
   end
+
+  context "When the game has users" do
+    before :each do
+      @user = FactoryGirl.build(:user)
+      @game = FactoryGirl.build(:game)
+      @game.users << @user
+    end
+
+    it "has the user associated" do
+      expect(@game.users).to include(@user)
+    end
+  end
 end
