@@ -11,16 +11,25 @@ class GamesController < ApplicationController
   end
 
   def show
-
+    render json: @game, status: :ok
   end
 
   def index
+    @games = Game.all
+    render json: @games, status: :ok
   end
 
   def destroy
+    @game.destroy
+    head :ok
   end
 
   def update
+    if @game.update_attributes(game_params)
+      render json: @game, status: :ok
+    else
+      render json: @game.errors, status: :unprocessable_entity
+    end
   end
 
   private
