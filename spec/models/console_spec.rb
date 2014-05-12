@@ -1,5 +1,17 @@
 require 'spec_helper'
 
 describe Console do
-  pending "add some examples to (or delete) #{__FILE__}"
+  describe "#create" do
+    subject { FactoryGirl.create(:console) }
+    it { should be_valid }
+    its(:name) { should include("Console") }
+
+    it "fails to create a console with the same name" do
+      expect { FactoryGirl.create(:console, name: subject.name) }.to raise_error
+    end
+
+    it "fails to create a console with a blank name" do
+      expect { FactoryGirl.create(:console, name: nil) }.to raise_error
+    end
+  end
 end

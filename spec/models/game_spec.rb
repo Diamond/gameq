@@ -9,6 +9,10 @@ describe Game do
     it "fails to create a game with the same name" do
       expect { FactoryGirl.create(:game, name: subject.name) }.to raise_error
     end
+
+    it "fails to create a game with a blank name" do
+      expect { FactoryGirl.create(:game, name: nil) }.to raise_error
+    end
   end
 
   context "For completion scopes" do

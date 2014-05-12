@@ -2,6 +2,6 @@
 
 FactoryGirl.define do
   factory :console do
-    name "MyString"
+    sequence(:name) { |n| "Console #{n}" }
   end
 end
