@@ -2,12 +2,19 @@ require 'spec_helper'
 
 describe Game do
   describe "#create" do
-    subject { FactoryGirl.create(:game) }
+    let (:console) { FactoryGirl.create(:console) }
+    subject { FactoryGirl.create(:game, console: console) }
     it { should be_valid }
     its(:name) { should include("game") }
+    its(:console) { should eq console }
 
-    it "fails to create a game with the same name" do
-      expect { FactoryGirl.create(:game, name: subject.name) }.to raise_error
+    it "fails to create a game with the same name for the same console" do
+      expect { FactoryGirl.create(:game, name: subject.name, console: console) }.to raise_error
+    end
+
+    it "allows creating a game with the same name for different consoles" do
+      new_console = FactoryGirl.create(:console, name: "test")
+      expect { FactoryGirl.create(:game, name: subject.name, console: new_console) }.to_not raise_error
     end
 
     it "fails to create a game with a blank name" do

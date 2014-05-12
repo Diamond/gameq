@@ -13,5 +13,10 @@ describe Console do
     it "fails to create a console with a blank name" do
       expect { FactoryGirl.create(:console, name: nil) }.to raise_error
     end
+
+    describe "With associated games" do
+      let (:game) { FactoryGirl.create(:game, console: subject) }
+      its(:games) { should include(game) }
+    end
   end
 end
