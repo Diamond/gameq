@@ -54,7 +54,7 @@ describe ConsolesController do
     end
 
     it "destroys the console" do
-      expect(console.where(id: @console.id).count).to eq 0 
+      expect(Console.where(id: @console.id).count).to eq 0
     end
   end
 

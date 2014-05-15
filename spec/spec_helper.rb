@@ -19,7 +19,7 @@ ActiveRecord::Migration.check_pending! if defined?(ActiveRecord::Migration)
 RSpec.configure do |config|
   # ## Mock Framework
   config.mock_with :mocha
-  BCrypt::Engine::DEFAULT_COST = 1
+  BCrypt::Engine.cost = BCrypt::Engine::MIN_COST
 
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
   #config.fixture_path = "#{::Rails.root}/spec/fixtures"
