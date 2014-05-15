@@ -1,6 +1,4 @@
 class GameTag < ActiveRecord::Base
-  attr_accessor :score
-
   belongs_to :game
   belongs_to :tag
 

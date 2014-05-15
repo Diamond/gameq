@@ -75,7 +75,6 @@ describe Game do
     end
 
     it "increases the score to 1" do
-      binding.pry
       expect(@game.game_tags.first.score).to eq 1
     end
   end
