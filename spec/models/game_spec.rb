@@ -50,4 +50,33 @@ describe Game do
       expect(@game.users).to include(@user)
     end
   end
+
+  context "When the game has tags" do
+    before :each do
+      @game = FactoryGirl.build(:game)
+      @tag  = FactoryGirl.build(:tag)
+      @game.tags << @tag
+    end
+
+    it "has the associated tag" do
+      expect(@game.tags).to include(@tag)
+    end
+  end
+
+  context "#add_tag" do
+    before :each do
+      @game = FactoryGirl.create(:game)
+      @tag  = FactoryGirl.create(:tag)
+      @game.add_tag @tag.name
+    end
+
+    it "adds the tag" do
+      expect(@game.tags).to include(@tag)
+    end
+
+    it "increases the score to 1" do
+      binding.pry
+      expect(@game.game_tags.first.score).to eq 1
+    end
+  end
 end

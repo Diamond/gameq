@@ -51,17 +51,17 @@ Feature Plan
     + Cannot update another user's account
 - v0.0.2
   - Game API
-    - Can add a new game to the list
-    - Can view games for an account
-    - Can remove a game from the list
-    - Can update a game
-    - Game Structure:
+    + Can add a new game to the list
+    + Can view games for an account
+    + Can remove a game from the list
+    + Can update a game
+    + Game Structure:
       - id, audit, completed
 - v0.0.3
   - Console API
-    - Can associate a game with a console
-    - Can view list of consoles
-    - Console Structure:
+    + Can associate a game with a console
+    + Can view list of consoles
+    + Console Structure:
       - id, audit, name
 - v0.0.4
   - Game Tags API
@@ -69,3 +69,5 @@ Feature Plan
     - Can remove tags from a game
     - Can view tags for a game
     - Can view games for a matching tag
+- v0.0.5
+  - User Story Review
