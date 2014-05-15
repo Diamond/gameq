@@ -38,6 +38,6 @@ class GamesController < ApplicationController
   end
 
   def set_game
-    @game = Game.where(params[:id]).first
+    @game = Game.where(id: params[:id]).first
   end
 end
