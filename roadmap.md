@@ -72,3 +72,16 @@ Feature Plan
 - v0.0.5
   - Code cleanup
   - User Story Review
+- v0.0.6
+  - Roles
+    - Can associate a user with a specific role
+    - Roles: [founder, admin, user, jailed]
+    - Founders can:
+      - Modify Admins, Games, Consoles, Tags, Users
+    - Admins can:
+      - Modify Games, Consoles, Tags, Users
+    - Users can:
+      - Modify own games, remove tags from games, modify own account
+    - Jailed can:
+      - Do nothing
+    - Need to associate game tags with a user id 
