@@ -65,5 +65,11 @@ describe ConsolesController do
       console.reload
       expect(console.name).to eq "foobar"
     end
+
+    it "fails to update with bad data" do
+      console = FactoryGirl.create(:console)
+      patch :update, id: console.id, console: { name: nil }
+      expect(response.status).to eq 422
+    end
   end
 end

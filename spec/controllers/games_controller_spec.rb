@@ -65,5 +65,12 @@ describe GamesController do
       game.reload
       expect(game.name).to eq "foobar"
     end
+
+    it "fails to update with bad data" do
+      game = FactoryGirl.create(:game)
+      patch :update, id: game.id, game: { name: nil }
+      expect(response.status).to eq 422
+    end
+
   end
 end
