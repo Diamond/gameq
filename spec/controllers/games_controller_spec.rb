@@ -14,17 +14,69 @@ describe GamesController do
   end
 
   describe 'GET "index"' do
-    before :each do
-      FactoryGirl.create(:game)
-      get :index
+    context "With no context" do
+      before :each do
+        FactoryGirl.create(:game)
+        get :index
+      end
+
+      it "returns a successful response" do
+        expect(response).to be_success
+      end
+
+      it "returns a list of games" do
+        expect(assigns(:games)).to_not be_empty
+      end
     end
 
-    it "returns a successful response" do
-      expect(response).to be_success
-    end
+    context "When in contexts" do
+      before :each do
+        @user   = FactoryGirl.create :user
+        @tag    = FactoryGirl.create :tag
+        @game_1 = FactoryGirl.create :game
+        @game_2 = FactoryGirl.create :game
+        @other_game = FactoryGirl.create :game
+      end
 
-    it "returns a list of games" do
-      expect(assigns(:games)).to_not be_empty
+      context "Of a user" do
+        before :each do
+          @user.games = [@game_1, @game_2]
+          @user.save
+          get :index, user_id: @user.id
+        end
+
+        it "returns a successful response" do
+          expect(response).to be_success
+        end
+
+        it "returns a list of games with the right user" do
+          expect(assigns(:games)).to include(@game_1)
+        end
+
+        it "gets a list of games only for the user" do
+          expect(assigns(:games)).to_not include(@other_game)
+        end
+      end
+
+      context "Of a tag" do
+        before :each do
+          GameTag.add_tag_for_game @tag, @game_1
+          GameTag.add_tag_for_game @tag, @game_2
+          get :index, tag_id: @tag.id
+        end
+
+        it "returns a successful response" do
+          expect(response).to be_success
+        end
+
+        it "returns a list of games with the right tag" do
+          expect(assigns(:games)).to include(@game_1)
+        end
+
+        it "gets a list of games only for the tag" do
+          expect(assigns(:games)).to_not include(@other_game)
+        end
+      end
     end
   end
 

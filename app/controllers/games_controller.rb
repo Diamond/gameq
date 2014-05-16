@@ -42,10 +42,10 @@ class GamesController < ApplicationController
   end
 
   def determine_nested_resource
-    if params[:member_id].present?
-      @game = Member.find(params[:member_id]).games
+    if params[:user_id].present?
+      @games = User.find(params[:user_id]).games
     elsif params[:tag_id].present?
-      @game = Tag.find(params[:tag_id]).games
+      @games = Tag.find(params[:tag_id]).games
     else
       @games = Game.all
     end
