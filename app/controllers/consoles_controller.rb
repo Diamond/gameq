@@ -25,7 +25,7 @@ class ConsolesController < ApplicationController
   end
 
   def update
-    if @console.update_attributes(console_params)
+    if @console.update_attributes console_params
       render json: @console, status: :ok
     else
       render json: @console.errors, status: :unprocessable_entity

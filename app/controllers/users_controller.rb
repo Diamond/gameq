@@ -29,7 +29,7 @@ class UsersController < ApplicationController
 
   def update
     if is_self? 
-      if @user.update_attributes(user_params)
+      if @user.update_attributes user_params
         render json: @user, status: :ok, location: @user
       else
         render json: @user.errors, status: :unprocessable_entity

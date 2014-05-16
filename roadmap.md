@@ -70,4 +70,5 @@ Feature Plan
     - Can view tags for a game
     - Can view games for a matching tag
 - v0.0.5
+  - Code cleanup
   - User Story Review
