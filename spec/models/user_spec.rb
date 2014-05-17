@@ -5,6 +5,7 @@ describe User do
     context "With valid data" do
       subject { FactoryGirl.build(:user) }
       it { should be_valid }
+      its(:role) { should_not be_nil }
     end
 
     context "With invalid data" do

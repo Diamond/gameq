@@ -2,7 +2,7 @@
 
 FactoryGirl.define do
   factory :role do
-    name "MyString"
-    level 1
+    name "Role"
+    sequence(:level) { |n| n }
   end
 end
