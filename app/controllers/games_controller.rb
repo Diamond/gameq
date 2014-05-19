@@ -2,8 +2,8 @@ class GamesController < ApplicationController
   before_filter :set_game, only: [:show, :destroy, :update]
 
   def create
-    @game = Game.new game_params
-    if @game.save
+    @game = Game.first_or_create game_params
+    if UserGame.add_game_for_user(@game, current_user, params[:completed])
       render json: @game, status: :ok, location: @game
     else
       render json: @game.errors, status: :unprocessable_entity
@@ -11,7 +11,12 @@ class GamesController < ApplicationController
   end
 
   def show
-    render json: @game, status: :ok
+    if params[:user_id].present?
+      @user_game = UserGame.where(user_id: params[:user_id], game_id: params[:id]).first
+    else
+      @user_game = Game.where(id: params[:id]).first
+    end
+    render json: @user_game, status: :ok
   end
 
   def index
@@ -20,25 +25,30 @@ class GamesController < ApplicationController
   end
 
   def destroy
-    @game.destroy
+    @user_game.destroy
     head :ok
   end
 
   def update
-    if @game.update_attributes game_params
-      render json: @game, status: :ok
+    if @user_game.update_attributes user_game_params
+      render json: @user_game, status: :ok
     else
-      render json: @game.errors, status: :unprocessable_entity
+      render json: @user_game.errors, status: :unprocessable_entity
     end
   end
 
   private
   def game_params
-    params.require(:game).permit(:name, :completed)
+    params.require(:game).permit(:name)
+  end
+
+  def user_game_params
+    { completed: params[:completed] }
   end
 
   def set_game
     @game = Game.where(id: params[:id]).first
+    @user_game = UserGame.where(game_id: @game.id, user_id: current_user.id).first
   end
 
   def determine_nested_resource

@@ -11,6 +11,7 @@ class GameTag < ActiveRecord::Base
   end
 
   def self.add_tag_for_game(tag, game)
+    return false unless tag.present? && game.present?
     gt = self.first_or_create(tag_id: tag.id, game_id: game.id)
     gt.increase_score
     gt

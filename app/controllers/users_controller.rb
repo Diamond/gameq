@@ -21,6 +21,7 @@ class UsersController < ApplicationController
   def destroy
     if is_self? 
       @user.destroy
+      logout
       head :ok
     else
       head :unprocessable_entity

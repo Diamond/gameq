@@ -3,12 +3,12 @@ require 'spec_helper'
 describe GamesController do
   describe 'POST "create"' do
     it "creates a game with valid data" do
-      post :create, game: { name: "New Game", completed: false }
+      post :create, game: { name: "New Game" }
       expect(response).to be_success
     end
 
     it "fails when creating a game with invalid data" do
-      post :create, game: { name: nil, completed: false }
+      post :create, game: { name: nil }
       expect(response.status).to eq 422
     end
   end
@@ -91,14 +91,16 @@ describe GamesController do
     end
 
     it "returns the expected game" do
-      expect(assigns(:game)).to eq @game
+      expect(assigns(:user_game)).to eq @game
     end
   end
 
   describe 'DELETE "destroy"' do
     before :each do
-      @game = FactoryGirl.create(:game)
-      delete :destroy, id: @game.id
+      @game      = FactoryGirl.create :game
+      @user      = FactoryGirl.create :user
+      @user_game = FactoryGirl.create :user_game, game_id: @game.id, user_id: @user.id
+      delete :destroy, id: @user_game.id
     end
 
     it "returns a successful response" do

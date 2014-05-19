@@ -2,8 +2,9 @@ class TagsController < ApplicationController
   before_filter :set_tag, only: [:show, :destroy, :update]
 
   def create
-    @tag = Tag.new tag_params
-    if @tag.save
+    @tag  = Tag.first_or_create tag_params
+    @game = Game.where(id: params[:game_id]).first
+    if @tag.valid? && GameTag.add_tag_for_game(@tag, @game)
       render json: @tag, status: :ok, location: @tag
     else
       render json: @tag.errors, status: :unprocessable_entity
@@ -12,24 +13,6 @@ class TagsController < ApplicationController
 
   def show
     render json: @tag, status: :ok
-  end
-
-  def index
-    @tags = Tag.all
-    render json: @tags, status: :ok
-  end
-
-  def destroy
-    @tag.destroy
-    head :ok
-  end
-
-  def update
-    if @tag.update_attributes tag_params
-      render json: @tag, status: :ok
-    else
-      render json: @tag.errors, status: :unprocessable_entity
-    end
   end
 
   private
