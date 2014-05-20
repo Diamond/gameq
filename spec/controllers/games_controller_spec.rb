@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe GamesController do
-  describe 'GET "index"' do
+  describe 'GET "games/index"' do
     before :each do
       FactoryGirl.create(:game)
       get :index
@@ -13,6 +13,29 @@ describe GamesController do
 
     it "returns a list of games" do
       expect(assigns(:games)).to_not be_empty
+    end
+  end
+
+  describe 'GET "tags/games/index"' do
+    before :each do
+      @tag  = FactoryGirl.create(:tag)
+      @game = FactoryGirl.create(:game)
+      @game.tags << @tag
+      @game.save
+      @game2 = FactoryGirl.create(:game)
+      get :index, tag_id: @tag.id
+    end
+
+    it "returns a successful response" do
+      expect(response).to be_success
+    end
+
+    it "returns a list of games" do
+      expect(assigns(:games)).to_not be_empty
+    end
+
+    it "does not include a game without the right tag" do
+      expect(assigns(:games)).to_not include(@game2)
     end
   end
 

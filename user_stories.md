@@ -30,7 +30,7 @@ As a User, when I show a specific game:
   - If the user is not specified, I only see the game's data.
   [DONE]
 
-User Routes:
+Game Routes:
   POST /users/:user_id/games => UserGames#create
   DELETE /users/:user_id/games/:id => UserGames#destroy
   PUT/PATCH /users/:user_id/games/:id => UserGames#update
@@ -59,6 +59,11 @@ As a User, when I request a tag:
 As a User, I cannot request a list of tags.
   [DONE]
 
+Tag Routes:
+  POST /games/:game_id/tags => GameTags#create
+  GET  /tags/:tag_id/games  => Games#index 
+  GET  /tags/:tag_id        => Tags#show
+
 ###Users###
 
 As a User, I can create a new user account.
@@ -71,3 +76,9 @@ As a User, I cannot request a list of users.
 [DONE]
 As a User, I can only view a user's profile.
 [DONE]
+
+User Routes:
+  POST /users       => Users#create
+  DELETE /users/:id => Users#destroy
+  PUT /users/:id    => Users#update
+  GET /users/:id    => Users#show
